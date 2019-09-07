@@ -8,6 +8,7 @@
 2. [Two Fer](/two-fer)
 3. [Hamming](/hamming)
 4. [Raindrops](/raindrops)
+5. [Scrabble Score](/scrabble-score)
 
 
 Extra Exercises
