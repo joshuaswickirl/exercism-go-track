@@ -6,13 +6,13 @@ import "fmt"
 // Distance returns the Hamming Distance between two DNA strands
 func Distance(a, b string) (int, error) {
 
-	if len(a) != len(b) {
-		return -1, fmt.Errorf("%s and %s are of different length", a, b)
+	if len([]rune(a)) != len([]rune(b)) {
+		return 0, fmt.Errorf("%s and %s are of different length", a, b)
 	}
 
 	hammingDistance := 0
-	for i := 0; i < len(a); i++ {
-		if a[i] != b[i] {
+	for i := 0; i < len([]rune(a)); i++ {
+		if []rune(a)[i] != []rune(b)[i] {
 			hammingDistance++
 		}
 	}
