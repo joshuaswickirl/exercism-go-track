@@ -9,6 +9,7 @@
 3. [Hamming](/hamming)
 4. [Raindrops](/raindrops)
 5. [Scrabble Score](/scrabble-score)
+6. [Isogram](/isogram)
 
 
 Extra Exercises
