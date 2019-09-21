@@ -7,8 +7,6 @@ func IsIsogram(word string) bool {
 
 	var lettersUsed = map[rune]bool{}
 
-	isIsogram := true
-
 	for _, char := range word {
 
 		if char == '-' || char == ' ' {
@@ -16,15 +14,13 @@ func IsIsogram(word string) bool {
 		}
 
 		letter := unicode.ToLower(char)
-		_, exists := lettersUsed[letter]
 
-		if exists {
-			isIsogram = false
-			break
-		} else {
-			lettersUsed[letter] = true
+		if lettersUsed[letter] {
+			return false
 		}
+
+		lettersUsed[letter] = true
 	}
 
-	return isIsogram
+	return true
 }
