@@ -10,6 +10,7 @@
 4. [Raindrops](/raindrops)
 5. [Scrabble Score](/scrabble-score)
 6. [Isogram](/isogram)
+7. [Difference of Squares](/difference-of-squares)
 
 
 Extra Exercises
