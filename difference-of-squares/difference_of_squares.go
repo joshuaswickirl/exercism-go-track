@@ -10,11 +10,7 @@ func SquareOfSum(n int) int {
 
 // SumOfSquares calculates the sum of the squares
 func SumOfSquares(n int) int {
-	var square int
-	for i := 0; i <= n; i++ {
-		square += i * i
-	}
-	return square
+	return n * (n + 1) * (2*n + 1) / 6
 }
 
 // Difference contrasts the return value of SquareOfSum and SumOfSquares
