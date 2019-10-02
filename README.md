@@ -11,6 +11,7 @@
 5. [Scrabble Score](/scrabble-score)
 6. [Isogram](/isogram)
 7. [Difference of Squares](/difference-of-squares)
+8. [Luhn](/luhn)
 
 
 Extra Exercises
