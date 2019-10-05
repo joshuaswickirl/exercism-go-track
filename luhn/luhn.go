@@ -15,28 +15,25 @@ func Valid(cardNumberInput string) bool {
 		return false
 	}
 
-	cardNumberArray := strings.Split(cardNumber, "")
+	cardNumberSlice := []rune(cardNumber)
 
 	var sum int
-	numIndexes := len(cardNumberArray) - 1
+	numIndexes := len(cardNumberSlice) - 1
 	for i := numIndexes; i >= 0; i-- {
 
 		if (numIndexes == i) || (numIndexes-i)%2 == 0 {
+			sum += int(cardNumberSlice[i] - '0')
 		} else {
 
-			value, _ := strconv.Atoi(cardNumberArray[i])
+			value := int(cardNumberSlice[i] - '0')
 			newValue := value * 2
 
 			if newValue > 9 {
 				newValue = newValue - 9
 			}
 
-			cardNumberArray[i] = strconv.Itoa(newValue)
+			sum += newValue
 		}
-
-		value, _ := strconv.Atoi(cardNumberArray[i])
-		sum += value
-
 	}
 
 	if sum%10 != 0 {
