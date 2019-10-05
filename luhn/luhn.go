@@ -7,7 +7,7 @@ import (
 
 // Valid checks if a credit card number is valid
 func Valid(cardNumberInput string) bool {
-	cardNumber := strings.Replace(cardNumberInput, " ", "", -1)
+	cardNumber := strings.ReplaceAll(cardNumberInput, " ", "")
 
 	// Validate input
 	_, err := strconv.Atoi(cardNumber)
