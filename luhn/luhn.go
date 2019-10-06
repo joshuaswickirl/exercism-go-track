@@ -15,7 +15,9 @@ func Valid(cardNumberInput string) bool {
 	cardNumberSlice := []rune(cardNumber)
 
 	var sum int
+	var everyOther bool
 	numIndexes := len(cardNumberSlice) - 1
+
 	for i := numIndexes; i >= 0; i-- {
 
 		value := int(cardNumberSlice[i] - '0')
@@ -24,18 +26,19 @@ func Valid(cardNumberInput string) bool {
 			return false
 		}
 
-		if (numIndexes == i) || (numIndexes-i)%2 == 0 {
+		if !everyOther {
 			sum += value
 		} else {
 
 			newValue := value * 2
-
 			if newValue > 9 {
 				newValue = newValue - 9
 			}
 
 			sum += newValue
 		}
+
+		everyOther = !everyOther
 	}
 
 	return sum%10 == 0
