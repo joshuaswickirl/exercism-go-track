@@ -1,7 +1,6 @@
 package luhn
 
 import (
-	"strconv"
 	"strings"
 )
 
@@ -9,9 +8,7 @@ import (
 func Valid(cardNumberInput string) bool {
 	cardNumber := strings.ReplaceAll(cardNumberInput, " ", "")
 
-	// Validate input
-	_, err := strconv.Atoi(cardNumber)
-	if err != nil || len(cardNumber) <= 1 {
+	if len(cardNumber) <= 1 {
 		return false
 	}
 
@@ -21,11 +18,16 @@ func Valid(cardNumberInput string) bool {
 	numIndexes := len(cardNumberSlice) - 1
 	for i := numIndexes; i >= 0; i-- {
 
+		value := int(cardNumberSlice[i] - '0')
+
+		if value < 0 || value > 9 {
+			return false
+		}
+
 		if (numIndexes == i) || (numIndexes-i)%2 == 0 {
-			sum += int(cardNumberSlice[i] - '0')
+			sum += value
 		} else {
 
-			value := int(cardNumberSlice[i] - '0')
 			newValue := value * 2
 
 			if newValue > 9 {
@@ -36,10 +38,5 @@ func Valid(cardNumberInput string) bool {
 		}
 	}
 
-	if sum%10 != 0 {
-		return false
-	}
-
-	return true
-
+	return sum%10 == 0
 }
