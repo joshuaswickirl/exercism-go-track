@@ -12,6 +12,7 @@
 6. [Isogram](/isogram)
 7. [Difference of Squares](/difference-of-squares)
 8. [Luhn](/luhn)
+9. [Grains](/grains)
 
 
 Extra Exercises
