@@ -13,6 +13,7 @@
 7. [Difference of Squares](/difference-of-squares)
 8. [Luhn](/luhn)
 9. [Grains](/grains)
+10. [Clock](/clock)
 
 
 Extra Exercises
