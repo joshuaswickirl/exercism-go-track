@@ -42,17 +42,17 @@ func (c *Clock) Adjust() {
 	for {
 		var changes bool
 		if c.minutes >= 60 {
-			c.minutes -= 60
-			c.hours++
+			c.hours += c.minutes / 60
+			c.minutes = c.minutes % 60
 			changes = true
 		}
 		if c.minutes < 0 {
-			c.minutes += 60
-			c.hours--
+			c.hours -= int(math.Abs(float64(c.minutes/60))) + 1
+			c.minutes = 60 - int(math.Abs(float64(c.minutes)))%60
 			changes = true
 		}
 		if c.hours >= 24 {
-			c.hours -= 24
+			c.hours = c.hours % 24
 			changes = true
 		}
 		if c.hours < 0 {
