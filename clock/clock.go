@@ -7,9 +7,10 @@ import (
 // Clock is the time in minutes
 type Clock int
 
+var minutesInDay = 1440
+
 // New creates a new clock
 func New(hours, minutes int) Clock {
-	minutesInDay := 1440
 	c := (hours*60 + minutes) % minutesInDay
 	if c < 0 {
 		c += minutesInDay
