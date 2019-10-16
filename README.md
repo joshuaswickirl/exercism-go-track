@@ -14,6 +14,7 @@
 8. [Luhn](/luhn)
 9. [Grains](/grains)
 10. [Clock](/clock)
+11. [Parallel Letter Frequency](/parallel-letter-frequency)
 
 
 Extra Exercises
