@@ -23,3 +23,4 @@ Extra Exercises
 - [Space Age](/space-age)
 - [Reverse String](/reverse-string)
 - [Leap](/leap)
+- [Accumulate](/accumulate)
