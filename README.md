@@ -24,3 +24,4 @@ Extra Exercises
 - [Reverse String](/reverse-string)
 - [Leap](/leap)
 - [Accumulate](/accumulate)
+- [Triangle](/triangle)
