@@ -20,4 +20,6 @@
 Extra Exercises
 ---------------
 ### Easy
-[Space Age](/space-age)
+- [Space Age](/space-age)
+- [Reverse String](/reverse-string)
+- [Leap](/leap)
