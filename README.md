@@ -25,3 +25,4 @@ Extra Exercises
 - [Leap](/leap)
 - [Accumulate](/accumulate)
 - [Triangle](/triangle)
+- [Series](/series)
