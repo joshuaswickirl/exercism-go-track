@@ -28,3 +28,4 @@ Extra Exercises
 - [Triangle](/triangle)
 - [Series](/series)
 - [ETL](/etl)
+- [Pangram](/pangram)
