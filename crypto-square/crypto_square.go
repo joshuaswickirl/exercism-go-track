@@ -32,13 +32,8 @@ func formRectangle(normalizedMessage string) ([]string, int, int) {
 	var rectangle []string
 	var numCols, currentCol int
 	var newRow string
-	sqrt := math.Sqrt(float64(len(normalizedMessage)))
 	// columns >= rows and columns - rows <= 1
-	if sqrt == float64(int64(sqrt)) {
-		numCols = int(sqrt)
-	} else {
-		numCols = int(math.Floor(sqrt)) + 1
-	}
+	numCols = int(math.Ceil(math.Sqrt(float64(len(normalizedMessage)))))
 	for i, r := range normalizedMessage {
 		newRow += string(r)
 		if currentCol == numCols-1 || i == len(normalizedMessage)-1 {
