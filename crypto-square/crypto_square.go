@@ -14,48 +14,18 @@ func Encode(message string) string {
 		}
 		return -1
 	}, strings.ToLower(message))
-
-	if len(normalMessage) <= 1 {
-		return normalMessage
+	messageLength := len(normalMessage)
+	width := int(math.Ceil(math.Sqrt(float64(messageLength))))
+	area := width * (width - 1)
+	padding := 0
+	if area < messageLength {
+		padding = area - messageLength + width
+	} else if area > messageLength {
+		padding = area - messageLength
 	}
-	rectangle, width, height := formRectangle(normalMessage)
-	paddingNeeded := int(math.Abs(float64((width * height) - len(normalMessage))))
-	encodedMessage := encodeMessage(rectangle, width, height, paddingNeeded)
-	return encodedMessage
-}
-
-func formRectangle(normalizedMessage string) ([]string, int, int) {
-	var rectangle []string
-	var numCols, currentCol int
-	var newRow string
-	// columns >= rows and columns - rows <= 1
-	numCols = int(math.Ceil(math.Sqrt(float64(len(normalizedMessage)))))
-	for i, r := range normalizedMessage {
-		newRow += string(r)
-		if currentCol == numCols-1 || i == len(normalizedMessage)-1 {
-			rectangle = append(rectangle, newRow)
-			newRow = ""
-			currentCol = 0
-			continue
-		}
-		currentCol++
+	columns := make([]string, width)
+	for i, r := range normalMessage + strings.Repeat(" ", padding) {
+		columns[i%width] += string(r)
 	}
-	return rectangle, len(rectangle[0]), len(rectangle)
-}
-
-func encodeMessage(rectangle []string, width, height, padding int) string {
-	var encodedMessage string
-	for col := 0; col < width; col++ {
-		for row := 0; row < height; row++ {
-			if col > width-1-int(padding) && row == height-1 {
-				encodedMessage += " "
-			} else {
-				encodedMessage += string(rectangle[row][col])
-			}
-			if row == height-1 && col != width-1 {
-				encodedMessage += " "
-			}
-		}
-	}
-	return encodedMessage
+	return strings.Join(columns, " ")
 }
