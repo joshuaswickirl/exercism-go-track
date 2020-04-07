@@ -8,7 +8,13 @@ import (
 
 // Encode returns a Crypto Square encoded message for a given string.
 func Encode(message string) string {
-	normalMessage := normalize(message)
+	normalMessage := strings.Map(func(r rune) rune {
+		if unicode.IsLetter(r) || unicode.IsDigit(r) {
+			return r
+		}
+		return -1
+	}, strings.ToLower(message))
+
 	if len(normalMessage) <= 1 {
 		return normalMessage
 	}
@@ -16,16 +22,6 @@ func Encode(message string) string {
 	paddingNeeded := int(math.Abs(float64((width * height) - len(normalMessage))))
 	encodedMessage := encodeMessage(rectangle, width, height, paddingNeeded)
 	return encodedMessage
-}
-
-func normalize(message string) string {
-	var normalized string
-	for _, r := range strings.ToLower(message) {
-		if unicode.IsLetter(r) || unicode.IsDigit(r) {
-			normalized += string(r)
-		}
-	}
-	return normalized
 }
 
 func formRectangle(normalizedMessage string) ([]string, int, int) {
