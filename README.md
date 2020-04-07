@@ -29,3 +29,4 @@ Extra Exercises
 - [Series](/series)
 - [ETL](/etl)
 - [Pangram](/pangram)
+- [Crypto Square](crypto-square)
