@@ -30,3 +30,4 @@ Extra Exercises
 - [ETL](/etl)
 - [Pangram](/pangram)
 - [Crypto Square](crypto-square)
+- [Protein Translation](/protein-translation)
