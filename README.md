@@ -29,6 +29,7 @@ Extra Exercises
 - [Protein Translation](/protein-translation)
 - [Proverb](/proverb)
 - [Reverse String](/reverse-string)
+- [RNA Transcription](/rna-transcription)
 - [Series](/series)
 - [Space Age](/space-age)
 - [Triangle](/triangle)
