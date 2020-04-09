@@ -25,6 +25,7 @@ Extra Exercises
 - [Crypto Square](crypto-square)
 - [ETL](/etl)
 - [Leap](/leap)
+- [Nucleotide Count](/nucleotide-count)
 - [Pangram](/pangram)
 - [Protein Translation](/protein-translation)
 - [Proverb](/proverb)
