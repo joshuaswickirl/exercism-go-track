@@ -31,3 +31,4 @@ Extra Exercises
 - [Pangram](/pangram)
 - [Crypto Square](crypto-square)
 - [Protein Translation](/protein-translation)
+- [Proverb](/proverb)
