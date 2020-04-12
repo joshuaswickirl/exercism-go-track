@@ -39,7 +39,7 @@ func (r *Robot) Reset() {
 func generateName() string {
 	l1, l2 := rand.Intn(26)+65, rand.Intn(26)+65
 	n := rand.Intn(1000)
-	return fmt.Sprintf("%s%s%d", string(byte(l1)), string(byte(l2)), n)
+	return fmt.Sprintf("%s%s%3d", string(byte(l1)), string(byte(l2)), n)
 }
 
 func init() {
