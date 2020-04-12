@@ -30,11 +30,10 @@ func Build(records []Record) (*Node, error) {
 			return &Node{}, errors.New("invalid records")
 		}
 		nodes[r.ID] = &Node{ID: r.ID}
-		if r.ID == 0 {
-			continue
+		if r.ID > 0 {
+			parent := nodes[r.Parent]
+			parent.Children = append(parent.Children, nodes[r.ID])
 		}
-		parent := nodes[r.Parent]
-		parent.Children = append(parent.Children, nodes[r.ID])
 	}
 	return nodes[0], nil
 }
