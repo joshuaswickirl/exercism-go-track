@@ -16,6 +16,7 @@
 10. [Clock](/clock)
 11. [Parallel Letter Frequency](/parallel-letter-frequency)
 12. [Tree Building](/tree-building)
+13. [Robot Name](/robot-name)
 
 
 Extra Exercises
