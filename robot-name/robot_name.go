@@ -20,7 +20,8 @@ var usedNames = map[string]bool{}
 func (r *Robot) Name() (string, error) {
 	if r.name != "" {
 		return r.name, nil
-	} else if len(usedNames) == namespaceCapacity {
+	}
+	if len(usedNames) == namespaceCapacity {
 		return "", errors.New("namespace is exhausted")
 	}
 	r.name = generateName()
@@ -37,7 +38,8 @@ func (r *Robot) Reset() {
 }
 
 func generateName() string {
-	l1, l2 := rand.Intn(26)+65, rand.Intn(26)+65
+	l1 := rand.Intn(26) + 'A'
+	l2 := rand.Intn(26) + 'A'
 	n := rand.Intn(1000)
 	return fmt.Sprintf("%s%s%03d", string(byte(l1)), string(byte(l2)), n)
 }
