@@ -41,7 +41,7 @@ func generateName() string {
 	l1 := rand.Intn(26) + 'A'
 	l2 := rand.Intn(26) + 'A'
 	n := rand.Intn(1000)
-	return fmt.Sprintf("%s%s%03d", string(byte(l1)), string(byte(l2)), n)
+	return fmt.Sprintf("%s%s%03d", string(l1), string(l2), n)
 }
 
 func init() {
