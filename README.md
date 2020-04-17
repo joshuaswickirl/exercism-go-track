@@ -17,6 +17,7 @@
 11. [Parallel Letter Frequency](/parallel-letter-frequency)
 12. [Tree Building](/tree-building)
 13. [Robot Name](/robot-name)
+14. [Tournament](/tournament)
 
 
 Extra Exercises
