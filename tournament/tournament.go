@@ -10,6 +10,7 @@ import (
 )
 
 type record struct {
+	team    string
 	wins    int
 	draws   int
 	losses  int
@@ -23,7 +24,6 @@ func Tally(r io.Reader, w io.Writer) error {
 	scanner := bufio.NewScanner(r)
 	scanner.Split(bufio.ScanLines)
 	tally := map[string]record{}
-	teams := []string{}
 	for scanner.Scan() {
 		line := scanner.Text()
 		// ignore comments and newlines
@@ -34,14 +34,8 @@ func Tally(r io.Reader, w io.Writer) error {
 		if len(tokens) != 3 {
 			return errors.New("bad results format")
 		}
-		team1Record, team1Ok := tally[tokens[0]]
-		team2Record, team2Ok := tally[tokens[1]]
-		if !team1Ok {
-			teams = append(teams, tokens[0])
-		}
-		if !team2Ok {
-			teams = append(teams, tokens[1])
-		}
+		team1Record := tally[tokens[0]]
+		team2Record := tally[tokens[1]]
 		team1Record.matches++
 		team2Record.matches++
 		switch tokens[2] {
@@ -64,30 +58,23 @@ func Tally(r io.Reader, w io.Writer) error {
 		tally[tokens[0]] = team1Record
 		tally[tokens[1]] = team2Record
 	}
+	records := []record{}
+	for t, r := range tally {
+		r.team = t
+		records = append(records, r)
+	}
 	// sort by wins, break ties alphabetically
-	sort.SliceStable(teams, func(i, j int) bool {
-		if tally[teams[i]].points == tally[teams[j]].points {
-			name1 := strings.ToLower(teams[i])
-			name2 := strings.ToLower(teams[j])
-			for k := 0; k < len(name1); k++ {
-				if name1[k] < name2[k] {
-					return true
-				}
-				if name1[k] > name2[k] {
-					return false
-				}
-			}
-			return true
+	sort.SliceStable(records, func(i, j int) bool {
+		if records[i].points == records[j].points {
+			return strings.ToLower(records[i].team) < strings.ToLower(records[j].team)
 		}
-		return tally[teams[i]].points > tally[teams[j]].points
+		return records[i].points > records[j].points
 	})
 	// write formatted table
-	fmt.Fprintf(w, "Team%s| MP |  W |  D |  L |  P\n", strings.Repeat(" ", 27))
-	for _, t := range teams {
-		r := tally[t]
-		fmt.Fprintf(w, "%v%s|  %v |  %v |  %v |  %v |  %v\n",
-			t, strings.Repeat(" ", 31-len(t)), r.matches, r.wins, r.draws,
-			r.losses, r.points)
+	fmt.Fprintf(w, "Team%-27s| MP |  W |  D |  L |  P\n", "")
+	for _, r := range records {
+		fmt.Fprintf(w, "%-31s|  %v |  %v |  %v |  %v |  %v\n",
+			r.team, r.matches, r.wins, r.draws, r.losses, r.points)
 	}
 	return nil
 }
