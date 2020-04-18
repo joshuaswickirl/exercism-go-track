@@ -34,29 +34,28 @@ func Tally(r io.Reader, w io.Writer) error {
 		if len(tokens) != 3 {
 			return errors.New("bad results format")
 		}
-		team1Record := tally[tokens[0]]
-		team2Record := tally[tokens[1]]
-		team1Record.matches++
-		team2Record.matches++
+		a, b := tally[tokens[0]], tally[tokens[1]]
+		a.matches++
+		b.matches++
 		switch tokens[2] {
 		case "win":
-			team1Record.wins++
-			team1Record.points += 3
-			team2Record.losses++
+			a.wins++
+			a.points += 3
+			b.losses++
 		case "loss":
-			team1Record.losses++
-			team2Record.wins++
-			team2Record.points += 3
+			a.losses++
+			b.wins++
+			b.points += 3
 		case "draw":
-			team1Record.draws++
-			team1Record.points++
-			team2Record.draws++
-			team2Record.points++
+			a.draws++
+			a.points++
+			b.draws++
+			b.points++
 		default:
 			return errors.New("bad match result")
 		}
-		tally[tokens[0]] = team1Record
-		tally[tokens[1]] = team2Record
+		tally[tokens[0]] = a
+		tally[tokens[1]] = b
 	}
 	records := []record{}
 	for t, r := range tally {
@@ -64,7 +63,7 @@ func Tally(r io.Reader, w io.Writer) error {
 		records = append(records, r)
 	}
 	// sort by wins, break ties alphabetically
-	sort.SliceStable(records, func(i, j int) bool {
+	sort.Slice(records, func(i, j int) bool {
 		if records[i].points == records[j].points {
 			return strings.ToLower(records[i].team) < strings.ToLower(records[j].team)
 		}
