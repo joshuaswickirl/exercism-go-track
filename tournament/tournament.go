@@ -28,60 +28,66 @@ func (r record) points() int {
 func Tally(r io.Reader, w io.Writer) error {
 	scanner := bufio.NewScanner(r)
 	scanner.Split(bufio.ScanLines)
-	tally := map[string]*record{}
+	tally := map[string]record{}
 	teams := []string{}
 	for scanner.Scan() {
 		line := scanner.Text()
 		// ignore comments and newlines
-		if line != "" && line[0] != '#' {
-			tokens := strings.SplitN(line, ";", -1)
-			if len(tokens) != 3 {
-				return errors.New("bad results format")
-			}
-			team1, team2, result := tokens[0], tokens[1], tokens[2]
-			if !strings.Contains(team1, " ") || !strings.Contains(team2, " ") {
-				return errors.New("bad team name")
-			}
-			if tally[team1] == nil {
-				tally[team1] = &record{}
-				teams = append(teams, team1)
-			}
-			if tally[team2] == nil {
-				tally[team2] = &record{}
-				teams = append(teams, team2)
-			}
-			switch result {
-			case "win":
-				tally[team1].wins++
-				tally[team2].losses++
-			case "loss":
-				tally[team1].losses++
-				tally[team2].wins++
-			case "draw":
-				tally[team1].draws++
-				tally[team2].draws++
-			default:
-				return errors.New("bad match result")
-			}
+		if line == "" || line[0] == '#' {
+			continue
 		}
+		tokens := strings.SplitN(line, ";", -1)
+		if len(tokens) != 3 {
+			return errors.New("bad results format")
+		}
+		team1Record, team1Ok := tally[tokens[0]]
+		team2Record, team2Ok := tally[tokens[1]]
+		if !team1Ok {
+			teams = append(teams, tokens[0])
+		}
+		if !team2Ok {
+			teams = append(teams, tokens[1])
+		}
+		switch tokens[2] {
+		case "win":
+			team1Record.wins++
+			team2Record.losses++
+		case "loss":
+			team1Record.losses++
+			team2Record.wins++
+		case "draw":
+			team1Record.draws++
+			team2Record.draws++
+		default:
+			return errors.New("bad match result")
+		}
+		tally[tokens[0]] = team1Record
+		tally[tokens[1]] = team2Record
 	}
-	// sort by wins, break ties alphabetically, albeit only by first letter ;)
+	// sort by wins, break ties alphabetically
 	sort.SliceStable(teams, func(i, j int) bool {
 		if tally[teams[i]].points() == tally[teams[j]].points() {
-			return byte(teams[i][0]) < byte(teams[j][0])
+			name1 := strings.ToLower(teams[i])
+			name2 := strings.ToLower(teams[j])
+			for k := 0; k < len(name1); k++ {
+				if name1[k] < name2[k] {
+					return true
+				}
+				if name1[k] > name2[k] {
+					return false
+				}
+			}
+			return true
 		}
 		return tally[teams[i]].points() > tally[teams[j]].points()
 	})
 	// write formatted table
-	output := []byte(fmt.Sprintf("Team%s| MP |  W |  D |  L |  P\n",
-		strings.Repeat(" ", 27)))
+	fmt.Fprintf(w, "Team%s| MP |  W |  D |  L |  P\n", strings.Repeat(" ", 27))
 	for _, t := range teams {
 		r := tally[t]
-		b := []byte(fmt.Sprintf("%v%s|  %v |  %v |  %v |  %v |  %v\n",
+		fmt.Fprintf(w, "%v%s|  %v |  %v |  %v |  %v |  %v\n",
 			t, strings.Repeat(" ", 31-len(t)), r.matches(), r.wins, r.draws,
-			r.losses, r.points()))
-		output = append(output, b...)
+			r.losses, r.points())
 	}
-	w.Write(output)
 	return nil
 }
