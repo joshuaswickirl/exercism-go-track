@@ -8,32 +8,32 @@ import (
 
 // Matrix is a made of multiple rows.
 type Matrix struct {
-	data       [][]int
-	rows, cols int
+	data             [][]int
+	numRows, numCols int
 }
 
 // Rows returns a slice of the matrix rows.
 func (m *Matrix) Rows() [][]int {
-	c := make([][]int, m.rows)
-	copy(c, m.data)
-	return c
+	rows := make([][]int, m.numRows)
+	copy(rows, m.data)
+	return rows
 }
 
 // Cols returns a slice of the matrix columns.
 func (m *Matrix) Cols() [][]int {
-	c := make([][]int, m.cols)
+	cols := make([][]int, m.numCols)
 	for _, row := range m.data {
-		for j, e := range row {
-			c[j] = append(c[j], e)
+		for i, v := range row {
+			cols[i] = append(cols[i], v)
 		}
 	}
-	return c
+	return cols
 }
 
 // Set updates a matrix element. It returns false if the index
 // does not exist.
 func (m *Matrix) Set(row, col, val int) bool {
-	if row < 0 || row >= m.rows || col < 0 || col >= m.cols {
+	if row < 0 || row >= m.numRows || col < 0 || col >= m.numCols {
 		return false
 	}
 	m.data[row][col] = val
@@ -48,17 +48,17 @@ func New(input string) (*Matrix, error) {
 	for _, ir := range inputRows {
 		row := []int{}
 		for _, i := range strings.Split(strings.TrimSpace(ir), " ") {
-			e, err := strconv.Atoi(i)
+			value, err := strconv.Atoi(i)
 			if err != nil {
 				return &Matrix{}, errors.New("input contains bad value")
 			}
-			row = append(row, e)
+			row = append(row, value)
 		}
-		if m.cols == 0 {
-			m.cols = len(row)
-			m.rows = len(inputRows)
+		if m.numCols == 0 {
+			m.numCols = len(row)
+			m.numRows = len(inputRows)
 		}
-		if len(row) != m.cols {
+		if len(row) != m.numCols {
 			return &Matrix{}, errors.New("inconsistent dimensions")
 		}
 		m.data = append(m.data, row)
