@@ -19,6 +19,7 @@
 13. [Robot Name](/robot-name)
 14. [Tournament](/tournament)
 15. [Twelve Days](/twelve-days)
+16. [Matrix](/matrix)
 
 
 Extra Exercises
