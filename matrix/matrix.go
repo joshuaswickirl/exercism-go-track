@@ -7,25 +7,24 @@ import (
 )
 
 // Matrix is a made of multiple rows.
-type Matrix struct {
-	data             [][]int
-	numRows, numCols int
-}
+type Matrix [][]int
 
 // Rows returns a slice of the matrix rows.
 func (m *Matrix) Rows() [][]int {
-	rows := make([][]int, m.numRows)
-	for i := range m.data {
-		rows[i] = make([]int, m.numCols)
-		copy(rows[i], m.data[i])
+	matrix := *m
+	rows := make([][]int, len(matrix))
+	for i := range matrix {
+		rows[i] = make([]int, len(matrix[0]))
+		copy(rows[i], matrix[i])
 	}
 	return rows
 }
 
 // Cols returns a slice of the matrix columns.
 func (m *Matrix) Cols() [][]int {
-	cols := make([][]int, m.numCols)
-	for _, row := range m.data {
+	matrix := *m
+	cols := make([][]int, len(matrix[0]))
+	for _, row := range matrix {
 		for i, v := range row {
 			cols[i] = append(cols[i], v)
 		}
@@ -36,10 +35,11 @@ func (m *Matrix) Cols() [][]int {
 // Set updates a matrix element. It returns false if the index
 // does not exist.
 func (m *Matrix) Set(row, col, val int) bool {
-	if row < 0 || row >= m.numRows || col < 0 || col >= m.numCols {
+	matrix := *m
+	if row < 0 || row >= len(matrix) || col < 0 || col >= len(matrix[0]) {
 		return false
 	}
-	m.data[row][col] = val
+	matrix[row][col] = val
 	return true
 }
 
@@ -48,6 +48,7 @@ func (m *Matrix) Set(row, col, val int) bool {
 func New(input string) (*Matrix, error) {
 	var m Matrix
 	inputRows := strings.Split(input, "\n")
+	rowLength := 0
 	for _, ir := range inputRows {
 		row := []int{}
 		for _, i := range strings.Split(strings.TrimSpace(ir), " ") {
@@ -57,14 +58,13 @@ func New(input string) (*Matrix, error) {
 			}
 			row = append(row, value)
 		}
-		if m.numCols == 0 {
-			m.numCols = len(row)
-			m.numRows = len(inputRows)
+		if len(m) == 0 {
+			rowLength = len(row)
 		}
-		if len(row) != m.numCols {
+		if len(row) != rowLength {
 			return &Matrix{}, errors.New("inconsistent dimensions")
 		}
-		m.data = append(m.data, row)
+		m = append(m, row)
 	}
 	return &m, nil
 }
