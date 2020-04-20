@@ -10,21 +10,19 @@ import (
 type Matrix [][]int
 
 // Rows returns a slice of the matrix rows.
-func (m *Matrix) Rows() [][]int {
-	matrix := *m
-	rows := make([][]int, len(matrix))
-	for i := range matrix {
-		rows[i] = make([]int, len(matrix[0]))
-		copy(rows[i], matrix[i])
+func (m Matrix) Rows() [][]int {
+	rows := make([][]int, len(m))
+	for i := range m {
+		rows[i] = make([]int, len(m[0]))
+		copy(rows[i], m[i])
 	}
 	return rows
 }
 
 // Cols returns a slice of the matrix columns.
-func (m *Matrix) Cols() [][]int {
-	matrix := *m
-	cols := make([][]int, len(matrix[0]))
-	for _, row := range matrix {
+func (m Matrix) Cols() [][]int {
+	cols := make([][]int, len(m[0]))
+	for _, row := range m {
 		for i, v := range row {
 			cols[i] = append(cols[i], v)
 		}
@@ -34,18 +32,17 @@ func (m *Matrix) Cols() [][]int {
 
 // Set updates a matrix element. It returns false if the index
 // does not exist.
-func (m *Matrix) Set(row, col, val int) bool {
-	matrix := *m
-	if row < 0 || row >= len(matrix) || col < 0 || col >= len(matrix[0]) {
+func (m Matrix) Set(row, col, val int) bool {
+	if row < 0 || row >= len(m) || col < 0 || col >= len(m[0]) {
 		return false
 	}
-	matrix[row][col] = val
+	m[row][col] = val
 	return true
 }
 
 // New contructs a matrix from the given input. It returns an error
 // if the input contains a bad value or inconsistent dimensions.
-func New(input string) (*Matrix, error) {
+func New(input string) (Matrix, error) {
 	var m Matrix
 	inputRows := strings.Split(input, "\n")
 	rowLength := 0
@@ -54,7 +51,7 @@ func New(input string) (*Matrix, error) {
 		for _, i := range strings.Split(strings.TrimSpace(ir), " ") {
 			value, err := strconv.Atoi(i)
 			if err != nil {
-				return &Matrix{}, errors.New("input contains bad value")
+				return Matrix{}, errors.New("input contains bad value")
 			}
 			row = append(row, value)
 		}
@@ -62,9 +59,9 @@ func New(input string) (*Matrix, error) {
 			rowLength = len(row)
 		}
 		if len(row) != rowLength {
-			return &Matrix{}, errors.New("inconsistent dimensions")
+			return Matrix{}, errors.New("inconsistent dimensions")
 		}
 		m = append(m, row)
 	}
-	return &m, nil
+	return m, nil
 }
