@@ -15,7 +15,10 @@ type Matrix struct {
 // Rows returns a slice of the matrix rows.
 func (m *Matrix) Rows() [][]int {
 	rows := make([][]int, m.numRows)
-	copy(rows, m.data)
+	for i := range m.data {
+		rows[i] = make([]int, m.numCols)
+		copy(rows[i], m.data[i])
+	}
 	return rows
 }
 

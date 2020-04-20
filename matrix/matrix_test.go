@@ -180,8 +180,7 @@ func TestRows(t *testing.T) {
 			continue // not currently in test data, but anyway
 		}
 		r[0][0]++
-		// !
-		if reflect.DeepEqual(m.Rows(), test.rows) {
+		if !reflect.DeepEqual(m.Rows(), test.rows) {
 			t.Fatalf("Matrix.Rows() returned slice based on Matrix " +
 				"representation.  Want independent copy of element data.")
 		}
