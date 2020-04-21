@@ -20,6 +20,7 @@
 14. [Tournament](/tournament)
 15. [Twelve Days](/twelve-days)
 16. [Matrix](/matrix)
+17. [Error Handling](/error-handling)
 
 
 Extra Exercises
