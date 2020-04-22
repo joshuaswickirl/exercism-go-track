@@ -1,6 +1,6 @@
 package erratum
 
-// Use ...
+// Use opens a resource and recovers if it panics.
 func Use(o ResourceOpener, input string) (err error) {
 	var resource Resource
 	for {
