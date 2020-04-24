@@ -4,6 +4,8 @@
 
 [exercism.io/profiles/joshuaswickirl](https://exercism.io/profiles/joshuaswickirl)
 
+Core Exercises (18/18)
+----------------------
 1.  [Hello World](/hello-world)
 2.  [Two Fer](/two-fer)
 3.  [Hamming](/hamming)
@@ -24,9 +26,9 @@
 18. [Bank Account](/bank-account)
 
 
-Extra Exercises
+Extra Exercises 
 ---------------
-### Easy
+### Easy (13/40)
 - [Accumulate](/accumulate)
 - [Crypto Square](crypto-square)
 - [ETL](/etl)
@@ -40,3 +42,7 @@ Extra Exercises
 - [Series](/series)
 - [Space Age](/space-age)
 - [Triangle](/triangle)
+
+### Medium (0/47)
+
+### Hard (0/4)
