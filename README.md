@@ -39,6 +39,7 @@ Extra Exercises
 - [Proverb](/proverb)
 - [Reverse String](/reverse-string)
 - [RNA Transcription](/rna-transcription)
+- [Roman Numerals](/roman-numerals)
 - [Series](/series)
 - [Space Age](/space-age)
 - [Triangle](/triangle)
