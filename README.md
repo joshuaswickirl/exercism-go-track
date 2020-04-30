@@ -28,7 +28,7 @@ Core Exercises (18/18)
 
 Extra Exercises 
 ---------------
-### Easy (13/40)
+### Easy (15/40)
 - [Accumulate](/accumulate)
 - [Crypto Square](crypto-square)
 - [ETL](/etl)
@@ -42,6 +42,7 @@ Extra Exercises
 - [Roman Numerals](/roman-numerals)
 - [Series](/series)
 - [Space Age](/space-age)
+- [Strain](/strain)
 - [Triangle](/triangle)
 
 ### Medium (0/47)
