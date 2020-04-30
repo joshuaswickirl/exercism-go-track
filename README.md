@@ -28,8 +28,9 @@ Core Exercises (18/18)
 
 Extra Exercises 
 ---------------
-### Easy (15/40)
+### Easy (16/40)
 - [Accumulate](/accumulate)
+- [Anagram](/anagram)
 - [Crypto Square](crypto-square)
 - [ETL](/etl)
 - [Leap](/leap)
