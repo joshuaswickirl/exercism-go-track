@@ -28,7 +28,7 @@ Core Exercises (18/18)
 
 Extra Exercises 
 ---------------
-### Easy (17/40)
+### Easy (18/40)
 - [Accumulate](/accumulate)
 - [Anagram](/anagram)
 - [Crypto Square](crypto-square)
@@ -41,6 +41,7 @@ Extra Exercises
 - [Reverse String](/reverse-string)
 - [RNA Transcription](/rna-transcription)
 - [Roman Numerals](/roman-numerals)
+- [Run Length Encoding](/run-length-encoding)
 - [Series](/series)
 - [Space Age](/space-age)
 - [Strain](/strain)
