@@ -28,7 +28,7 @@ Core Exercises (18/18)
 
 Extra Exercises 
 ---------------
-### Easy (18/40)
+### Easy (19/40)
 - [Accumulate](/accumulate)
 - [Anagram](/anagram)
 - [Crypto Square](crypto-square)
@@ -45,6 +45,7 @@ Extra Exercises
 - [Series](/series)
 - [Space Age](/space-age)
 - [Strain](/strain)
+- [Sum Of Multiples](/sum-of-multiples)
 - [Triangle](/triangle)
 - [Word Count](/word-count)
 
