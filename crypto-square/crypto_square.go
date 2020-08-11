@@ -17,11 +17,9 @@ func Encode(message string) string {
 	messageLength := len(normalMessage)
 	width := int(math.Ceil(math.Sqrt(float64(messageLength))))
 	area := width * (width - 1)
-	padding := 0
+	padding := area - messageLength
 	if area < messageLength {
-		padding = area - messageLength + width
-	} else if area > messageLength {
-		padding = area - messageLength
+		padding += width
 	}
 	columns := make([]string, width)
 	for i, r := range normalMessage + strings.Repeat(" ", padding) {
