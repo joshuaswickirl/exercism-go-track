@@ -7,9 +7,11 @@ import (
 )
 
 func RunLengthEncode(data string) string {
-	var encoded string
-	var last rune
-	var num int
+	var (
+		encoded string
+		last rune
+		num int
+	)
 	for _, curr := range data {
 		if last == 0 || last == curr {
 			last = curr
@@ -33,8 +35,7 @@ func RunLengthEncode(data string) string {
 }
 
 func RunLengthDecode(data string) string {
-	var decoded string
-	var num string
+	var decoded, num string
 	for _, r := range data {
 		if r >= '1' && r <= '9' {
 			num += string(r)
